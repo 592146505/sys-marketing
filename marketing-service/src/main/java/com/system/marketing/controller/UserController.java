@@ -2,6 +2,7 @@ package com.system.marketing.controller;
 
 import com.system.marketing.dto.req.UserLoginReq;
 import com.system.marketing.dto.req.UserRegistrationReq;
+import com.system.marketing.dto.resp.LoginSuccessResp;
 import com.system.marketing.service.UserService;
 import com.system.marketing.vo.Result;
 import io.swagger.annotations.Api;
@@ -28,7 +29,7 @@ public class UserController {
 
     @ApiOperation(value = "用户登录", notes = "用户登录")
     @PostMapping("login")
-    public Result<?> signIn(@RequestBody UserLoginReq req) {
+    public Result<LoginSuccessResp> signIn(@RequestBody UserLoginReq req) {
         return userService.userLogin(req);
     }
 

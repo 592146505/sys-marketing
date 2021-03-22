@@ -28,14 +28,13 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    Predicate<RequestHandler> selector1 = RequestHandlerSelectors.basePackage("com.polaris.lesscode.form.controller");
-    Predicate<RequestHandler> selector2 = RequestHandlerSelectors.basePackage("com.polaris.lesscode.form.internal.controller");
+    Predicate<RequestHandler> selector1 = RequestHandlerSelectors.basePackage("com.system.marketing.controller");
 
     @Bean
     public Docket managerDocument() {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
                 .select()
-                .apis(Predicates.or(selector1, selector2))
+                .apis(Predicates.or(selector1))
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(securitySchemes())
