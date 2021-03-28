@@ -17,11 +17,14 @@ public class UserRegistrationReq {
     @NotBlank(message = "用户名不能为空")
     private String username;
 
+    @NotBlank(message = "用户姓名不能为空")
+    private String name;
+
     @NotBlank(message = "密码不能为空")
-    private String pwd;
+    private String password;
 
     private String mobile;
 
-    private Integer role;
+//    private Integer role;
 
 }

@@ -52,7 +52,7 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
         String servletPath = request.getServletPath();
         String url = request.getRequestURL().toString();
         // 校验登录人信息
-        String accessToken = request.getHeader("access-token");
+        String accessToken = request.getHeader(KeyConsts.TOKEN);
         Object obj = redisUtil.get(KeyConsts.USER_KEY + accessToken);
         if (obj == null) {
             throw new BusinessException(ResultCode.NO_TOKEN);

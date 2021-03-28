@@ -21,6 +21,10 @@ public enum ResultCode implements AbstractResultCode {
     NO_TOKEN(1000, "用户token失效，请重新登录"),
     LOGIN_FAIL(1001, "用户名或密码错误，登录失败"),
     REPEAT_LOGIN(1002, "该用户已登录"),
+    POLICY_NOT_EXIST(1003, "该政策不存在或已删除"),
+    POLICY_FILE_UPLOAD_FAIL(1004, "政策文件上传失败"),
+    POLICY_FILE_NAME_NOT_NULL(1005, "政策文件名不能为空"),
+    POLICY_FILE_TYPE_ERROR(1006, "政策文件上传类型仅支持pdf、word、ppt"),
     ;
 
     ResultCode(int code, String message) {

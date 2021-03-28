@@ -17,6 +17,6 @@ public class UserLoginReq {
     private String username;
 
     @NotBlank(message = "密码不能为空")
-    private String pwd;
+    private String password;
 
 }

@@ -11,4 +11,8 @@ public interface KeyConsts {
 
     String IS_LOGIN_IN = "login:";
 
+    String TOKEN = "access-token";
+
+    String UPLOAD_FILE_PATH = "/data/files/";
+
 }

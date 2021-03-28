@@ -37,6 +37,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getInterceptor())//注册自定义拦截器
                 .addPathPatterns("/user/**")//拦截的请求路径
+                .addPathPatterns("/mobile/*")
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/user/register");
     }
