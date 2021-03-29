@@ -35,6 +35,8 @@ public class Policy {
 
     private String path;
 
+    private String fileName;
+
     private Long creator;
 
     private Long updator;

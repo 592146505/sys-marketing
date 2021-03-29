@@ -3,6 +3,7 @@ package com.system.marketing.controller.mobile;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.marketing.dto.req.PolicyInputReq;
 import com.system.marketing.dto.req.QueryPolicyReq;
+import com.system.marketing.dto.resp.PolicyFileUploadResp;
 import com.system.marketing.dto.resp.PolicyInputResp;
 import com.system.marketing.service.PolicyService;
 import com.system.marketing.vo.Result;
@@ -44,7 +45,7 @@ public class PolicyController {
 
     @ApiOperation(value = "上传文件", notes = "上传文件")
     @PostMapping("upload")
-    public Result<String> uploadPolicy(@NotNull @RequestParam("file") MultipartFile file) {
+    public Result<PolicyFileUploadResp> uploadPolicy(@NotNull @RequestParam("file") MultipartFile file) {
         return Result.ok(policyService.uploadFile(file));
     }
 

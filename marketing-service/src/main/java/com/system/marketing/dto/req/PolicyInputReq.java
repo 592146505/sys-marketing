@@ -30,6 +30,10 @@ public class PolicyInputReq {
     @NotBlank(message = "文号不能为空")
     private String no;
 
+    @ApiModelProperty(notes = "文件路径")
+    @NotBlank(message = "文件路径不能为空")
+    private String path;
+
     @ApiModelProperty(notes = "文件名称")
     @NotBlank(message = "上传的文件名称不能为空")
     private String fileName;

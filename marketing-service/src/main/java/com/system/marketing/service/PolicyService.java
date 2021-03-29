@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.system.marketing.consts.KeyConsts;
 import com.system.marketing.dto.req.PolicyInputReq;
 import com.system.marketing.dto.req.QueryPolicyReq;
+import com.system.marketing.dto.resp.PolicyFileUploadResp;
 import com.system.marketing.dto.resp.PolicyInputResp;
 import com.system.marketing.entity.Policy;
 import com.system.marketing.entity.SysUser;
@@ -27,6 +28,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * @author: Liu.B.J
@@ -49,12 +51,13 @@ public class PolicyService extends ServiceImpl<PolicyMapper, Policy> {
     public Boolean policyInput(HttpServletRequest request, PolicyInputReq req) {
         Object objUser = redisUtil.get(KeyConsts.USER_KEY + request.getHeader(KeyConsts.TOKEN));
         SysUser user = GsonUtil.convert(objUser, SysUser.class);
-        String path = KeyConsts.UPLOAD_FILE_PATH + req.getFileName();
+//        String path = KeyConsts.UPLOAD_FILE_PATH + req.getFileName();
         return this.baseMapper.insert(Policy.builder()
                 .name(req.getName())
                 .type(req.getType())
                 .no(req.getNo())
-                .path(path)
+                .path(req.getPath())
+                .fileName(req.getFileName())
                 .creator(user.getId())
                 .updator(user.getId())
                 .build()) > 0;
@@ -66,21 +69,25 @@ public class PolicyService extends ServiceImpl<PolicyMapper, Policy> {
      * @param file
      * @return
      */
-    public String uploadFile(MultipartFile file) {
+    public PolicyFileUploadResp uploadFile(MultipartFile file) {
         FileVerifyUtil.suffixCheck(file);
-        String fileName = file.getOriginalFilename();
+        String fileName = file.getOriginalFilename() + "-" + UUID.randomUUID().toString().replaceAll("-", "");
         String filePath = KeyConsts.UPLOAD_FILE_PATH;
         File dir = new File(filePath.substring(0, filePath.lastIndexOf(File.separator)));
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File dest = new File(filePath + fileName);
+        PolicyFileUploadResp resp = new PolicyFileUploadResp();
+        String path = filePath + fileName;
+        File dest = new File(path);
         try {
             file.transferTo(dest);
         } catch (IOException e) {
             throw new BusinessException(ResultCode.POLICY_FILE_UPLOAD_FAIL);
         }
-        return fileName;
+        resp.setFileName(file.getOriginalFilename());
+        resp.setPath(path);
+        return resp;
     }
 
     /**

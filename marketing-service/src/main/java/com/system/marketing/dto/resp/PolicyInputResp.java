@@ -27,6 +27,9 @@ public class PolicyInputResp {
     @ApiModelProperty(notes = "创建时间")
     private Date createTime;
 
+    @ApiModelProperty(notes = "文件名称")
+    private String fileName;
+
     @ApiModelProperty(notes = "附件路径")
     private String path;
 
